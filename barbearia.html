@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Black Point BarberShop | Barbearia Premium</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #080808;
+      --bg-soft: #111111;
+      --card: rgba(255, 255, 255, 0.06);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --gold: #d7a84f;
+      --gold-2: #f4d58d;
+      --text: #f7f3ea;
+      --muted: #b6afa2;
+      --dark: #050505;
+      --white: #ffffff;
+      --danger: #25d366;
+      --shadow: 0 25px 80px rgba(0, 0, 0, 0.55);
+      --radius: 24px;
+      --max: 1180px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Montserrat", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(215, 168, 79, 0.16), transparent 28%),
+        radial-gradient(circle at 88% 18%, rgba(215, 168, 79, 0.08), transparent 30%),
+        linear-gradient(120deg, rgba(255,255,255,0.02), transparent 45%);
+      z-index: -2;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .top-bar {
+      background: linear-gradient(90deg, #0f0f0f, #1b1510, #0f0f0f);
+      border-bottom: 1px solid rgba(215, 168, 79, 0.18);
+      color: var(--muted);
+      font-size: 13px;
+      padding: 10px 0;
+    }
+
+    .top-bar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .top-info {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .top-info span {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(8, 8, 8, 0.78);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    nav {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--gold), #8a5c18);
+      color: #090909;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      box-shadow: 0 12px 30px rgba(215, 168, 79, 0.25);
+    }
+
+    .logo small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 2px;
+      margin-top: 2px;
+      font-weight: 600;
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .menu a {
+      transition: 0.25s ease;
+    }
+
+    .menu a:hover {
+      color: var(--gold-2);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: none;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-weight: 800;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold-2), var(--gold));
+      color: #111;
+      box-shadow: 0 14px 35px rgba(215, 168, 79, 0.25);
+    }
+
+    .btn-gold:hover {
+      box-shadow: 0 18px 45px rgba(215, 168, 79, 0.36);
+    }
+
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #36e47c, #128c4c);
+      color: var(--white);
+      box-shadow: 0 14px 35px rgba(37, 211, 102, 0.25);
+    }
+
+    .btn-outline {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .mobile-btn {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .hero {
+      min-height: calc(100vh - 122px);
+      padding: 84px 0 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -180px;
+      top: 40px;
+      width: 560px;
+      height: 560px;
+      background: radial-gradient(circle, rgba(215, 168, 79, 0.2), transparent 65%);
+      filter: blur(8px);
+      z-index: -1;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.04fr 0.96fr;
+      gap: 52px;
+      align-items: center;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(215, 168, 79, 0.28);
+      background: rgba(215, 168, 79, 0.08);
+      color: var(--gold-2);
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(44px, 7vw, 86px);
+      line-height: 0.95;
+      letter-spacing: -2.5px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span {
+      display: block;
+      color: var(--gold-2);
+      text-shadow: 0 0 45px rgba(215, 168, 79, 0.18);
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.8;
+      max-width: 620px;
+      margin-bottom: 32px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 620px;
+    }
+
+    .stat {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--gold-2);
+      font-size: 25px;
+      margin-bottom: 5px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: 620px;
+      border-radius: 34px;
+      overflow: hidden;
+      background:
+        linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.12), rgba(0,0,0,0.72)),
+        url("https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1200&q=85") center/cover;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border-radius: 26px;
+      border: 1px solid rgba(215, 168, 79, 0.24);
+      pointer-events: none;
+    }
+
+    .floating-card {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      bottom: 28px;
+      padding: 24px;
+      border-radius: 26px;
+      background: rgba(5, 5, 5, 0.72);
+      border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(16px);
+    }
+
+    .floating-card h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .floating-card p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 18px;
+      font-size: 14px;
+    }
+
+    .section {
+      padding: 92px 0;
+      position: relative;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 42px;
+    }
+
+    .section-kicker {
+      color: var(--gold-2);
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 2px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.04;
+      letter-spacing: -1.5px;
+    }
+
+    .section-desc {
+      max-width: 480px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      position: relative;
+      padding: 28px;
+      border-radius: var(--radius);
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      overflow: hidden;
+      min-height: 260px;
+      transition: 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(215, 168, 79, 0.38);
+      background: rgba(255,255,255,0.085);
+    }
+
+    .service-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      background: rgba(215, 168, 79, 0.12);
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      margin-bottom: 24px;
+    }
+
+    .service-card h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+      margin-bottom: 22px;
+    }
+
+    .price {
+      color: var(--gold-2);
+      font-weight: 900;
+      font-size: 18px;
+    }
+
+    .experience {
+      background:
+        linear-gradient(rgba(0,0,0,0.76), rgba(0,0,0,0.84)),
+        url("https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=1600&q=85") center/cover fixed;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .experience-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .feature {
+      display: flex;
+      gap: 16px;
+      padding: 20px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.055);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .check {
+      width: 34px;
+      height: 34px;
+      min-width: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--gold-2), var(--gold));
+      color: #111;
+      font-weight: 900;
+    }
+
+    .feature h3 {
+      margin-bottom: 6px;
+      font-size: 18px;
+    }
+
+    .feature p {
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 14px;
+    }
+
+    .about-card {
+      padding: 38px;
+      border-radius: 32px;
+      background: rgba(0,0,0,0.62);
+      border: 1px solid rgba(215, 168, 79, 0.18);
+      box-shadow: var(--shadow);
+    }
+
+    .about-card p {
+      color: var(--muted);
+      line-height: 1.9;
+      margin: 18px 0 28px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr;
+      grid-template-rows: 260px 260px;
+      gap: 18px;
+    }
+
+    .gallery-item {
+      border-radius: 28px;
+      overflow: hidden;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      position: relative;
+    }
+
+    .gallery-item:nth-child(1) {
+      grid-row: span 2;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.92) contrast(1.05);
+      transition: 0.5s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .info-card, .map-card {
+      border-radius: 32px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .info-card {
+      padding: 34px;
+    }
+
+    .info-block {
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .info-block:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .info-block h3 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      color: var(--gold-2);
+    }
+
+    .info-block p, .info-block li {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    .hours {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    .hours li {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .map-card iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 520px;
+      border: 0;
+      filter: grayscale(1) invert(0.92) contrast(0.92);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .testimonial {
+      padding: 28px;
+      border-radius: var(--radius);
+      background: var(--card);
+      border: 1px solid var(--card-border);
+    }
+
+    .stars {
+      color: var(--gold-2);
+      letter-spacing: 3px;
+      margin-bottom: 16px;
+    }
+
+    .testimonial p {
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+
+    .client {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+    }
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-2), var(--gold));
+      color: #111;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+    }
+
+    .cta {
+      padding: 90px 0;
+    }
+
+    .cta-box {
+      border-radius: 38px;
+      padding: 60px;
+      background:
+        linear-gradient(135deg, rgba(215,168,79,0.2), rgba(255,255,255,0.05)),
+        #0e0e0e;
+      border: 1px solid rgba(215, 168, 79, 0.24);
+      text-align: center;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-box::before {
+      content: "BP";
+      position: absolute;
+      right: -20px;
+      bottom: -70px;
+      font-size: 220px;
+      font-weight: 900;
+      color: rgba(255,255,255,0.035);
+      line-height: 1;
+    }
+
+    .cta-box h2 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(34px, 5vw, 62px);
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .cta-box p {
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 690px;
+      margin: 0 auto 28px;
+      position: relative;
+    }
+
+    footer {
+      padding: 36px 0;
+      background: #050505;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+    }
+
+    .footer-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 14px;
+    }
+
+    .socials {
+      display: flex;
+      gap: 10px;
+    }
+
+    .socials a {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: 0.25s ease;
+    }
+
+    .socials a:hover {
+      background: var(--gold);
+      color: #111;
+      transform: translateY(-3px);
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #25d366;
+      color: #fff;
+      font-size: 30px;
+      z-index: 60;
+      box-shadow: 0 15px 35px rgba(37,211,102,0.35);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: 0.7s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1020px) {
+      .hero-grid,
+      .experience-grid,
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid,
+      .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-card {
+        min-height: 540px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .top-bar {
+        display: none;
+      }
+
+      nav {
+        height: 74px;
+      }
+
+      .mobile-btn {
+        display: grid;
+        place-items: center;
+      }
+
+      .menu {
+        position: fixed;
+        left: 20px;
+        right: 20px;
+        top: 86px;
+        padding: 22px;
+        border-radius: 22px;
+        background: rgba(8,8,8,0.96);
+        border: 1px solid rgba(255,255,255,0.12);
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        box-shadow: var(--shadow);
+      }
+
+      .menu.open {
+        display: flex;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 54px;
+      }
+
+      .stats,
+      .services-grid,
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-header {
+        display: block;
+      }
+
+      .section-desc {
+        margin-top: 16px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+      }
+
+      .gallery-item,
+      .gallery-item:nth-child(1) {
+        height: 260px;
+        grid-row: auto;
+      }
+
+      .cta-box {
+        padding: 38px 24px;
+      }
+
+      .hours li {
+        display: block;
+      }
+      
+    }
+    .btn.btn-instagram {
+      background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
+      color: #fff;
+      border: none;
+      box-shadow: 0 14px 35px rgba(221, 42, 123, 0.35);
+    }
+
+    .btn.btn-instagram:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 45px rgba(221, 42, 123, 0.5);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-actions .btn-instagram {
+      width: auto;
+      flex-basis: 100%;
+      max-width: 200px;
+      }
+
+  </style>
+</head>
+
+<body>
+  <!--
+    PERSONALIZE AQUI:
+    1) Troque o número abaixo pelo WhatsApp da barbearia, com DDI e DDD, somente números.
+       Exemplo: 5548999999999
+    2) Troque o endereço, cidade e links das redes sociais.
+  -->
+
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-info">
+        <span>📍 Rua Porto Alegre, 864 - Santa Helena</span>
+        <span>🕒 Terça a sábado: 09h às 20h</span>
+      </div>
+      <div class="top-info">
+        <span>⭐ Atendimento com hora marcada</span>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#inicio" class="logo" aria-label="Black Point BarberShop">
+          <div class="logo-icon">✂</div>
+          <div>
+            Black Point
+            <small>BARBERSHOP</small>
+          </div>
+        </a>
+
+        <button class="mobile-btn" id="mobileBtn" aria-label="Abrir menu">☰</button>
+
+        <div class="menu" id="menu">
+          <a href="#servicos">Serviços</a>
+          <a href="#experiencia">Experiência</a>
+          <a href="#galeria">Galeria</a>
+          <a href="#localizacao">Localização</a>
+          <a href="#depoimentos">Avaliações</a>
+        </div>
+
+        <a class="btn btn-gold nav-cta whatsapp-link" href="#" target="_blank" rel="noopener">Agendar agora</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-content reveal">
+          <div class="tag">🔥 Estilo premium para homens exigentes</div>
+          <h1>Seu visual no <span>ponto certo.</span></h1>
+          <p>
+            Na Black Point BarberShop, cada corte é pensado para valorizar sua identidade.
+            Ambiente sofisticado, atendimento de alto padrão e profissionais preparados para entregar presença, confiança e estilo.
+          </p>
+
+          <div class="hero-actions">
+          <a class="btn btn-whatsapp whatsapp-link" href="#" target="_blank" rel="noopener">
+          💬 Agendar pelo WhatsApp
+          </a>
+
+          <a class="btn btn-instagram" href="https://www.instagram.com/blackpointbarbershop_/" target="_blank" rel="noopener">
+          📸 Ver no Instagram
+          </a>
+
+          <a class="btn btn-outline" href="#servicos">Ver serviços</a>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>+500</strong>
+              <span>Clientes atendidos</span>
+            </div>
+            <div class="stat">
+              <strong>4.9★</strong>
+              <span>Avaliação média</span>
+            </div>
+            <div class="stat">
+              <strong>100%</strong>
+              <span>Atendimento personalizado</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card reveal">
+          <div class="floating-card">
+            <h3>Transforme seu visual hoje</h3>
+            <p>Cortes modernos, barba alinhada, acabamento preciso e experiência premium em cada detalhe.</p>
+            <a class="btn btn-gold whatsapp-link" href="#" target="_blank" rel="noopener">Reservar horário</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="servicos">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">Nossos serviços</div>
+            <h2 class="section-title">Corte, barba e acabamento de alto nível.</h2>
+          </div>
+          <p class="section-desc">
+            Serviços criados para quem quer sair da barbearia com visual alinhado, moderno e pronto para qualquer ocasião.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card reveal">
+            <div class="service-icon">💈</div>
+            <h3>Corte Degradê</h3>
+            <p>Corte moderno com degradê bem alinhado, acabamento na navalha e finalização profissional.</p>
+            <div class="price">R$ 40,00</div>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-icon">✂️</div>
+            <h3>Corte Social</h3>
+            <p>Corte clássico, elegante e versátil para o dia a dia, trabalho ou ocasiões especiais.</p>
+            <div class="price">R$ 40,00</div>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-icon">👁️</div>
+            <h3>Sobrancelha</h3>
+            <p>Limpeza e alinhamento da sobrancelha para deixar o rosto mais harmonioso.</p>
+            <div class="price">R$ 10,00</div>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-icon">🧔</div>
+            <h3>Barba</h3>
+            <p>Modelagem da barba com acabamento preciso, deixando o visual mais limpo e marcante.</p>
+            <div class="price">R$ 30,00</div>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-icon">🎨</div>
+            <h3>Pigmentação</h3>
+            <p>Realce de cabelo ou barba para um visual mais preenchido, definido e uniforme.</p>
+            <div class="price">R$ 30,00</div>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-icon">❄️</div>
+            <h3>Nevou / Platinado</h3>
+            <p>Transformação de cor para quem busca um visual estiloso, moderno e de presença.</p>
+            <div class="price">R$ 150,00</div>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-icon">⚡</div>
+            <h3>Raspado</h3>
+            <p>Visual prático, limpo e bem finalizado, com acabamento profissional.</p>
+            <div class="price">R$ 30,00</div>
+          </article>
+        </div>
+
+        <div class="section-header reveal" style="margin-top: 58px;">
+          <div>
+            <div class="section-kicker">Planos mensais</div>
+            <h2 class="section-title">Pacotes para manter o visual sempre em dia.</h2>
+          </div>
+          <p class="section-desc">
+            Ideal para clientes que querem praticidade, economia e frequência no cuidado com cabelo e barba.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card reveal">
+            <div class="service-icon">💈</div>
+            <h3>Mensal Corte Degradê</h3>
+            <p>Plano mensal para manter o degradê sempre alinhado durante o mês.</p>
+            <div class="price">R$ 140,00</div>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-icon">✂️</div>
+            <h3>Mensal Corte Social</h3>
+            <p>Plano mensal para manter o corte social limpo, elegante e bem finalizado.</p>
+            <div class="price">R$ 120,00</div>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-icon">👑</div>
+            <h3>Degradê & Barba</h3>
+            <p>Pacote mensal com cabelo degradê e barba para um visual completo.</p>
+            <div class="price">R$ 230,00</div>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-icon">🧔</div>
+            <h3>Social & Barba</h3>
+            <p>Pacote mensal com corte social e barba alinhada.</p>
+            <div class="price">R$ 215,00</div>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-icon">🔥</div>
+            <h3>Mensal Barba</h3>
+            <p>Plano mensal para manter a barba sempre desenhada, limpa e bem cuidada.</p>
+            <div class="price">R$ 80,00</div>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-icon">⭐</div>
+            <h3>Cabelo + Barba + Sobrancelha</h3>
+            <p>Pacote mensal completo para quem quer manter o visual impecável.</p>
+            <div class="price">R$ 280,00</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section experience" id="experiencia">
+      <div class="container experience-grid">
+        <div class="about-card reveal">
+          <div class="section-kicker">Por que escolher</div>
+          <h2 class="section-title">Mais que uma barbearia. Uma experiência.</h2>
+          <p>
+            A Black Point BarberShop combina técnica, estilo e atendimento personalizado.
+            Cada cliente recebe uma análise do visual, indicação de corte e finalização adequada ao seu perfil.
+          </p>
+          <a class="btn btn-whatsapp whatsapp-link" href="#" target="_blank" rel="noopener">Falar com um barbeiro</a>
+        </div>
+
+        <div class="feature-list">
+          <div class="feature reveal">
+            <div class="check">✓</div>
+            <div>
+              <h3>Ambiente sofisticado</h3>
+              <p>Espaço moderno, confortável e pensado para você relaxar enquanto cuida do visual.</p>
+            </div>
+          </div>
+
+          <div class="feature reveal">
+            <div class="check">✓</div>
+            <div>
+              <h3>Agendamento fácil</h3>
+              <p>Reserve seu horário direto pelo WhatsApp, sem complicação e com atendimento rápido.</p>
+            </div>
+          </div>
+
+          <div class="feature reveal">
+            <div class="check">✓</div>
+            <div>
+              <h3>Profissionais qualificados</h3>
+              <p>Técnicas atualizadas, cuidado nos detalhes e acabamento que realmente valoriza o cliente.</p>
+            </div>
+          </div>
+
+          <div class="feature reveal">
+            <div class="check">✓</div>
+            <div>
+              <h3>Produtos de qualidade</h3>
+              <p>Finalização com produtos selecionados para cabelo, barba e pele.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="galeria">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">Galeria</div>
+            <h2 class="section-title">Visual que passa presença.</h2>
+          </div>
+          <p class="section-desc">
+            Inspire-se no estilo Black Point: cortes limpos, barba alinhada e detalhes que fazem diferença.
+          </p>
+        </div>
+
+        <div class="gallery-grid">
+          <div class="gallery-item reveal">
+            <img src="foto1.png" alt="Barbeiro fazendo acabamento" />
+          </div>
+          <div class="gallery-item reveal">
+            <img src="foto2.png" alt="Corte masculino moderno" />
+          </div>
+          <div class="gallery-item reveal">
+            <img src="foto3.png" alt="Ambiente de barbearia" />
+          </div>
+          <div class="gallery-item reveal">
+            <img src="foto4.png" alt="Barba sendo aparada" />
+          </div>
+          <div class="gallery-item reveal">
+            <img src="foto5.png" alt="Produtos de barbearia" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="localizacao">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">Onde estamos</div>
+            <h2 class="section-title">Venha para a Black Point.</h2>
+          </div>
+          <p class="section-desc">
+            Atendimento com hora marcada para garantir pontualidade, conforto e uma experiência melhor.
+          </p>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-card reveal">
+            <div class="info-block">
+              <h3>📍 Localização</h3>
+              <p id="addressText">Rua Porto Alegre, 864 - Santa Helena</p>
+              <br />
+              <a class="btn btn-outline" id="mapsLink" href="https://www.google.com/maps/search/?api=1&query=Rua%20Porto%20Alegre%20864%20Santa%20Helena" target="_blank" rel="noopener">Abrir no Google Maps</a>
+            </div>
+
+            <div class="info-block">
+              <h3>🕒 Horários</h3>
+              <ul class="hours">
+                <li><span>Segunda-feira</span><strong>14h às 19h</strong></li>
+                <li><span>Terça a sexta</span><strong>09h às 12h / 14h às 19h</strong></li>
+                <li><span>Sábado</span><strong>09h às 16h</strong></li>
+                <li><span>Domingo</span><strong>Fechado</strong></li>
+              </ul>
+            </div>
+
+            <div class="info-block">
+              <h3>📲 Contato</h3>
+              <p>Agendamentos, dúvidas e orçamentos pelo WhatsApp.</p>
+              <br />
+              <a class="btn btn-whatsapp whatsapp-link" href="#" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+            </div>
+          </div>
+
+          <div class="map-card reveal">
+            <iframe
+              title="Mapa da Black Point BarberShop"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Rua%20Porto%20Alegre%20864%20Santa%20Helena&output=embed">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="depoimentos">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">Avaliações</div>
+            <h2 class="section-title">Quem passa por aqui, recomenda.</h2>
+          </div>
+          <p class="section-desc">
+            Uma boa barbearia não entrega só corte. Entrega confiança, cuidado e vontade de voltar.
+          </p>
+        </div>
+
+        <div class="testimonials-grid">
+          <article class="testimonial reveal">
+            <div class="stars">★★★★★</div>
+            <p>“Atendimento top, ambiente muito bonito e o corte ficou exatamente como eu queria. Recomendo demais.”</p>
+            <div class="client"><div class="avatar">M</div> Marcos Silva</div>
+          </article>
+
+          <article class="testimonial reveal">
+            <div class="stars">★★★★★</div>
+            <p>“Fui para fazer barba e saí cliente fixo. Os caras cuidam dos detalhes e são muito profissionais.”</p>
+            <div class="client"><div class="avatar">R</div> Rafael Costa</div>
+          </article>
+
+          <article class="testimonial reveal">
+            <div class="stars">★★★★★</div>
+            <p>“O combo corte e barba vale muito a pena. Barbearia organizada, pontual e com acabamento perfeito.”</p>
+            <div class="client"><div class="avatar">L</div> Lucas Pereira</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="agendamento">
+      <div class="container">
+        <div class="cta-box reveal">
+          <h2>Pronto para renovar seu estilo?</h2>
+          <p>
+            Clique no botão abaixo, fale direto com a Black Point BarberShop no WhatsApp e reserve o melhor horário para o seu corte.
+          </p>
+          <a class="btn btn-whatsapp whatsapp-link" href="#" target="_blank" rel="noopener">💬 Fale Conosco </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <p>© <span id="year"></span> Black Point BarberShop. Todos os direitos reservados.</p>
+      <div class="socials">
+        <a href="https://www.instagram.com/blackpointbarbershop_/" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
+        <a class="whatsapp-link" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+        <a href="#localizacao" aria-label="Localização">📍</a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="whatsapp-float whatsapp-link" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">💬</a>
+
+  <script>
+    // ==========================
+    // CONFIGURAÇÕES DO SITE
+    // ==========================
+    const WHATSAPP_NUMBER = "5549999046967"; // Troque pelo número real. Exemplo: 5548999999999
+    const BUSINESS_NAME = "Black Point BarberShop";
+    const ADDRESS = "Rua Porto Alegre, 864 - Santa Helena";
+
+    const WHATSAPP_MESSAGE = `Olá! Vim pelo site da ${BUSINESS_NAME} e gostaria de agendar um horário.`;
+
+    document.querySelectorAll(".whatsapp-link").forEach((link) => {
+      link.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+    });
+
+    document.getElementById("addressText").textContent = ADDRESS;
+    document.getElementById("mapsLink").href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`;
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Menu mobile
+    const mobileBtn = document.getElementById("mobileBtn");
+    const menu = document.getElementById("menu");
+
+    mobileBtn.addEventListener("click", () => {
+      menu.classList.toggle("open");
+      mobileBtn.textContent = menu.classList.contains("open") ? "×" : "☰";
+    });
+
+    document.querySelectorAll(".menu a").forEach((item) => {
+      item.addEventListener("click", () => {
+        menu.classList.remove("open");
+        mobileBtn.textContent = "☰";
+      });
+    });
+
+    // Animação ao rolar a página
+    const revealElements = document.querySelectorAll(".reveal");
+
+    const revealOnScroll = () => {
+      const windowHeight = window.innerHeight;
+
+      revealElements.forEach((element) => {
+        const elementTop = element.getBoundingClientRect().top;
+
+        if (elementTop < windowHeight - 90) {
+          element.classList.add("active");
+        }
+      });
+    };
+
+    window.addEventListener("scroll", revealOnScroll);
+    window.addEventListener("load", revealOnScroll);
+  </script>
+</body>
+</html>
